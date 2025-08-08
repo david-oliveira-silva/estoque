@@ -12,11 +12,16 @@ namespace Estoque.Camadas.View
                 "1-Cadastro Produto\n" +
                 "2-Remover Produto\n" +
                 "3-Atualizar Produto\n" +
-                "4-Listar Produto\n"+
+                "4-Listar Produto\n" +
+                "[Estoque]\n" +
+                "5- Adicionar produto Estoque\n" +
+                "6- Remover produt Estoque\n" +
+                "7- Listar Estoque\n"+
                 "-------------------" +
                 "\n0-Sair";
 
             ProdutoController produtoController = new ProdutoController();
+            EstoqueController estoqueController = new EstoqueController();
 
             int opc;
             do
@@ -62,7 +67,41 @@ namespace Estoque.Camadas.View
                         produtoController.atualizarProduto(produtoSelecionadoAtualizar,nomeProdutoAtualizado,valorProdutoAtualizado);
                         break;
                     case 4:
+                        Console.Clear();
+
                         produtoController.listaProdutos();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        produtoController.listaProdutos();
+                        int codigoProdutoSelecionado = lerInt("digite o código do produto que deseja adicionar no estoque");
+
+                        int quantidadeAdicionar = lerInt("Digite a quantidade que deseja adiconar no estoque");
+                        var produtoEstoque = produtoController.listaProdutos().FirstOrDefault(p => p.codigoProduto == codigoProdutoSelecionado);
+                        if (produtoEstoque == null)
+                        {
+                            Console.WriteLine("Produto não encontrado!");
+                            break;
+                        }
+                        var estoqueSelecionado = estoqueController.listarEstoque().FirstOrDefault(e => e.produto.codigoProduto == codigoProdutoSelecionado);
+
+                        if (estoqueSelecionado != null)
+                        {
+                            estoqueController.cadastrarEstoque(estoqueSelecionado, quantidadeAdicionar);
+                        }
+                        else
+                        {
+                            
+                            var novoEstoque = new EstoqueModel(produtoEstoque);
+                            estoqueController.cadastrarEstoque(novoEstoque, quantidadeAdicionar);
+                        }
+
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        Console.Clear();
+                        estoqueController.listarEstoque();
                         break;
 
 

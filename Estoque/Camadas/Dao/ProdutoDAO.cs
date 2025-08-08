@@ -65,12 +65,14 @@ namespace Estoque.Camadas.Dao
             
                 produtoList = new List<ProdutoModel>();
             }
-    
-            produto.Max(p => p.codigoProduto + 1);
+
+            if (produto.Any())
+            {
+                ProdutoModel.proximoNumero = produto.Max(p => p.codigoProduto) + 1;
+            }
             return produto;
 
-                
-        
+
         }
         
     }
