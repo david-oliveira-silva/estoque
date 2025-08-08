@@ -1,4 +1,5 @@
 ﻿using Estoque.Camadas.Controller;
+using Estoque.Camadas.Model;
 
 namespace Estoque.Camadas.View
 {
@@ -10,7 +11,7 @@ namespace Estoque.Camadas.View
                 "[PRODUTO]\n" +
                 "1-Cadastro Produto\n" +
                 "2-Remover Produto\n" +
-                "3-Atualizar Produto" +
+                "3-Atualizar Produto\n" +
                 "4-Listar Produto\n"+
                 "-------------------" +
                 "\n0-Sair";
@@ -33,14 +34,32 @@ namespace Estoque.Camadas.View
                         produtoController.listaProdutos();
                         break;
                     case 1:
+                        Console.Clear();
+
                         string nomeProduto = lerString("Digite o nome do produto");
                         decimal valorProduto = lerDecimal("Digite o valor do produto");
                         produtoController.cadastrarProduto(nomeProduto,valorProduto);
                         break;
 
                     case 2:
+                        Console.Clear();
+                        produtoController.listaProdutos();
+                        int codigoProdutoRemover = lerInt("Digite o codigo do produto remover");
+                        var produtoSelecionado = produtoController.listaProdutos().FirstOrDefault(p => p.codigoProduto == codigoProdutoRemover);
+                        produtoController.deletarProduto(produtoSelecionado);
                         break;
                     case 3:
+
+                        Console.Clear();
+                        produtoController.listaProdutos();
+
+                        int codigoProdutoAtualizado = lerInt("Digite o codigo do produto que deseja atualizar");
+                        
+                        string nomeProdutoAtualizado = lerString("Digite o nome do produto");
+                        decimal valorProdutoAtualizado = lerDecimal("Digite o valor do produto");
+                        
+                        var produtoSelecionadoAtualizar = produtoController.listaProdutos().FirstOrDefault(p => p.codigoProduto == codigoProdutoAtualizado);
+                        produtoController.atualizarProduto(produtoSelecionadoAtualizar,nomeProdutoAtualizado,valorProdutoAtualizado);
                         break;
                     case 4:
                         produtoController.listaProdutos();
@@ -49,7 +68,7 @@ namespace Estoque.Camadas.View
 
 
                 }
-            } while (opc == 0);
+            } while (opc != 0);
         }
         static string lerString(string mensagem)
         {
