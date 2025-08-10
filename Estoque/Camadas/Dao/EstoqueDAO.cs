@@ -39,12 +39,12 @@ namespace Estoque.Camadas.Dao
             salvarArquivo();
         }
 
-        void IEstoqueDAO.removerEstoque(EstoqueModel estoqueModel, int quantidade)
+        void IEstoqueDAO.removerEstoque(int codigoProduto, int quantidade)
         {
-            var itemExistente = estoqueList.FirstOrDefault(e => e.produto.codigoProduto == estoqueModel.produto.codigoProduto);
+            var itemExistente = estoqueList.FirstOrDefault(e => e.produto.codigoProduto == codigoProduto);
             if( itemExistente != null)
             {
-                estoqueModel.removerEstoque(quantidade);
+                itemExistente.removerEstoque(quantidade);
 
             }
                 

@@ -30,30 +30,23 @@ namespace Estoque.Camadas.Service
 
             estoqueDAO.adicionarEstoque(estoqueModel, quantidade);
         }
-        public void removerEstoque(EstoqueModel estoqueModel, int quantidade)
+        public void removerEstoque(int codigoProduto, int quantidade)
         {
-            if (estoqueModel == null)
-            {
-                throw new ArgumentNullException("Estoque não encontrado");
-            }
+            
             if (quantidade <= 0)
             {
                 throw new ArgumentException("Adicione uma quantidade maior que 0");
             }
-            var itemExiste = estoqueDAO.listarEstoque().FirstOrDefault(e => e.idEstoque == estoqueModel.idEstoque);
+           
 
-            if(itemExiste != null)
+            if (codigoProduto < 0)
             {
-                itemExiste.quantidadeEstoque += quantidade;
+                throw new ArgumentException("codigo invalido!");
             }
-            else
-            {
-                
-                estoqueModel.quantidadeEstoque = quantidade;
-                estoqueDAO.adicionarEstoque(estoqueModel, quantidade);
-            }
+        
 
-            estoqueDAO.removerEstoque(estoqueModel, quantidade);
+
+            estoqueDAO.removerEstoque(codigoProduto, quantidade);
 
 
         }

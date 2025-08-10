@@ -15,7 +15,7 @@ namespace Estoque.Camadas.View
                 "4-Listar Produto\n" +
                 "[Estoque]\n" +
                 "5- Adicionar produto Estoque\n" +
-                "6- Remover produt Estoque\n" +
+                "6- Remover produto Estoque\n" +
                 "7- Listar Estoque\n"+
                 "-------------------" +
                 "\n0-Sair";
@@ -98,6 +98,10 @@ namespace Estoque.Camadas.View
 
                         break;
                     case 6:
+                        int codigoRemover = lerInt("digite o codigo do produto que deseja remover");
+                        
+                        int quantidadeRemover = lerInt("digite a quantidade que deseja remover");
+                        estoqueController.removerEstoque(codigoRemover, quantidadeRemover);
                         break;
                     case 7:
                         Console.Clear();

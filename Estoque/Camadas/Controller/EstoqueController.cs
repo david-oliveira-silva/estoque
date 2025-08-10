@@ -25,11 +25,12 @@ namespace Estoque.Camadas.Controller
             }
         
         }
-        public void removerEstoque(EstoqueModel estoqueModel, int quantidade)
+        public void removerEstoque(int codigoProduto, int quantidade)
         {
             try
             {
-                estoqueService.removerEstoque(estoqueModel,quantidade);
+                estoqueService.removerEstoque(codigoProduto,quantidade);
+                Console.WriteLine($"Foi removido{quantidade} produto com ID{codigoProduto} do estoque");
             }
             catch (ArgumentException ex)
             {

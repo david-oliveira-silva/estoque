@@ -11,7 +11,7 @@ namespace Estoque.Camadas.Dao.Interface
     {
         void adicionarEstoque(EstoqueModel estoqueModel, int quantidade);
 
-        void removerEstoque(EstoqueModel estoqueModel, int quantidade);
+        void removerEstoque(int codigoProduto, int quantidade);
 
         List<EstoqueModel> listarEstoque();
     }
